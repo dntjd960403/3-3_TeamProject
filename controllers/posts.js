@@ -37,7 +37,7 @@ class PostsController {
   createPost = async (req, res, next) => {
     const { userId } = res.locals.user;
     const { title, content } = await postSchema.validateAsync(req.body); // 게시글 생성할 때 joi 검사 한번.
-    console.log("req.body 값" + title, content)
+
     const createPostData = await this.postService.createPost(
       userId,
       title,
