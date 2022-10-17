@@ -14,6 +14,7 @@ class PostService {
       return b.createdAt - a.createdAt;
     });
 
+    //올려보내기
     return allPost;
   };
 
@@ -25,6 +26,7 @@ class PostService {
       content
     );
 
+    // 올려보내기
     return createPostData;
   };
 
@@ -39,8 +41,8 @@ class PostService {
   updatePost = async (userId, postId, title, content) => {
     // 업데이트할 게시글 찾기
     const findPost = await this.postRepository.findPostById(postId);
-    if (!findPost) return ("삭제된 게시물입니다.");
-
+    if (!findPost) return "삭제된 게시물입니다.";
+    if (userId !== findPost.userId) return "수정할 수 없는 게시물입니다.";
     // 수정하기 
     await this.postRepository.updatePost(userId, postId, title, content);
 
@@ -52,7 +54,8 @@ class PostService {
     // 삭제하기 전 게시글 찾아보기
     const findPost = await this.postRepository.findPostById(postId);
     if (!findPost) return ("삭제된 게시물입니다.");
-
+    if (userId !== findPost.userId) return "삭제할 수 없는 게시물입니다."
+    // 삭제하기
     await this.postRepository.deletePost(userId, postId);
     return findPost;
   };
