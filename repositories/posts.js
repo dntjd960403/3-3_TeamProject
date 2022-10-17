@@ -35,7 +35,6 @@ class PostRepository {
 
   createPost = async (userId, title, content) => {
     // 검사는 service에서 다 했음. 넣는 기능만
-    console.log("리포에 뜨는값" + userId, title, content)
     const createPostData = await Posts.create({
       userId,
       title,
@@ -80,34 +79,18 @@ class PostRepository {
   };
 
   updatePost = async (userId, postId, title, content) => {
-    try {
-      console.log(postId)
-      const updatePostData = await Posts.update(
-        { title, content },
-        { where: { postId, userId } }
-      );
-
-      if (updatePostData < 1) throw "수정이 안됐습니다."
-
-      return updatePostData;
-
-    } catch (err) {
-      console.log(err)
-    }
+    const updatePostData = await Posts.update(
+      { title, content },
+      { where: { postId, userId } }
+    );
+    return updatePostData;
   };
 
   deletePost = async (userId, postId) => {
-    try {
-      const deleteCount = await Posts.destroy({
-        where: { userId, postId },
-      });
-      console.log(userId, postId)
-      console.log(deleteCount)
-      // if (deleteCount < 1) throw "삭제가 안됐습니다."
-      return deleteCount
-    } catch (err) {
-      console.log(err)
-    }
+    const deleteCount = await Posts.destroy({
+      where: { userId, postId },
+    });
+    return deleteCount
   };
 }
 

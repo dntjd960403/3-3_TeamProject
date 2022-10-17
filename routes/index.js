@@ -7,7 +7,7 @@ const SignUp = require('./signup');
 
 const router = express.Router();
 
-router.use('/posts/', Likes);
+router.use('/likes/', Likes);
 router.use('/posts/', Posts);
 router.use('/comments/', Comments);
 router.use('/login/', Login);
