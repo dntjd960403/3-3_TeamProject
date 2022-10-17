@@ -40,9 +40,8 @@ class PostRepository {
       title,
       content,
     });
-
     // 만든 게시글 내용 올려보내기
-    return createPostData;
+    return "게시물을 생성하였습니다.";
   };
 
   findPostById = async (postId) => {

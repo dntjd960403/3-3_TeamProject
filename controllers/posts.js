@@ -43,7 +43,7 @@ class PostsController {
       title,
       content
     );
-    res.status(201).json({ '생성 결과': createPostData });
+    res.status(201).json({ message: createPostData });
   };
 
   updatePost = async (req, res, next) => {
@@ -51,14 +51,14 @@ class PostsController {
     const { postId } = req.params;
     const { title, content } = await postSchema.validateAsync(req.body);
 
-    const updatePost = await this.postService.updatePost(
+    const message = await this.postService.updatePost(
       userId,
       postId,
       title,
       content
     );
 
-    res.status(200).json({ '수정된 내용': updatePost });
+    res.status(200).json(message);
   };
 
   deletePost = async (req, res, next) => {
@@ -66,9 +66,9 @@ class PostsController {
     const { postId } = req.params;
 
     // 비밀번호는 authMiddleware를 통해 전할 수 있기 때문에 뺐음.
-    const deletePost = await this.postService.deletePost(userId, postId);
+    const message = await this.postService.deletePost(userId, postId);
 
-    res.status(200).json({ '삭제된 내용': deletePost });
+    res.status(200).json(message);
   };
 }
 
