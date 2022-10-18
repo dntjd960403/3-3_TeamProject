@@ -16,8 +16,14 @@ class LoginService {
         6. 토큰을 만들기 위해 jwt 라이브러리를 사용해 유저 아이디와 secret키를 이용하여 사이닝한다.
         7. 객체에 토큰과 expires를 담아서 리턴 해준다.
     */
-    loginUser = async (nickname, password) => {
+
+    findUser = async (nickname) => {
         const loginUser = await this.loginRepository.findUser(nickname)
+        return loginUser
+    }
+
+    loginUser = async (nickname, password) => {
+        const loginUser = await this.findUser(nickname)
 
         if (!loginUser) throw {code:-1}
 

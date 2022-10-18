@@ -15,7 +15,7 @@ class SignupController {
   
     postSignup = async (req, res, next) => {
       try {
-        const { nickname, password, confirm } = await userSchema.validateAsync(req.body);
+        const { nickname, password, confirm } = req.body;
   
         if (password !== confirm) {
             return res.status(412).send({
