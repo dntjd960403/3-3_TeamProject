@@ -4,20 +4,30 @@ class LikesController {
   LikesService = new LikesService();
 
   getlikes = async (req, res, next) => {
-    const { userId } = res.locals.user;
+    try {
+      const { userId } = res.locals.user;
 
-    let userLikes = await this.LikesService.findAllLike(userId);
+      let userLikes = await this.LikesService.findAllLike(userId);
 
-    res.status(200).json({ userLikes })
+      res.status(200).json({ userLikes })
+
+    } catch (err) {
+      res.status(404).send(err)
+    }
   }
 
   putLike = async (req, res, next) => {
-    const { userId } = res.locals.user;
-    const { postId } = req.params;
+    try {
+      const { userId } = res.locals.user;
+      const { postId } = req.params;
 
-    const result = await this.LikesService.putLike(userId, postId)
+      const result = await this.LikesService.putLike(userId, postId)
 
-    res.status(200).json({ result })
+      res.status(200).json({ result })
+
+    } catch (err) {
+      res.status(400).send(err)
+    }
   }
 }
 

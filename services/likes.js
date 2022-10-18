@@ -4,17 +4,27 @@ class LikesService {
   LikesRepository = new LikesRepository()
 
   findAllLike = async (userId) => {
-    let userLikePosts = await this.LikesRepository.findUserLikePosts(userId)
+    try {
+      let userLikePosts = await this.LikesRepository.findUserLikePosts(userId)
 
-    userLikePosts.sort((a, b) => b.createdAt - a.createdAt);
-    userLikePosts.sort((a, b) => b.likes - a.likes);
+      userLikePosts.sort((a, b) => b.createdAt - a.createdAt);
+      userLikePosts.sort((a, b) => b.likes - a.likes);
 
-    return userLikePosts
+      return userLikePosts
+
+    } catch (err) {
+      throw err
+    }
   }
 
   putLike = async (userId, postId) => {
-    const result = await this.LikesRepository.putLike(userId, postId);
-    return result;
+    try {
+      const result = await this.LikesRepository.putLike(userId, postId);
+      return result;
+
+    } catch (err) {
+      throw err
+    }
   }
 }
 
