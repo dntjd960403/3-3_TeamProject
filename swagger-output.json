@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "version": "1.0.0",
-    "title": "응 바꼈띄",
+    "title": "Swagger도 조져버려따리~",
     "description": "swagger 만들기"
   },
   "host": "localhost:3030",
@@ -131,6 +131,7 @@
     "/comments/{postId}": {
       "get": {
         "description": "코멘트 불러오기",
+        "tags": ["댓글API"],
         "parameters": [
           {
             "name": "postId",
@@ -153,6 +154,7 @@
       },
       "post": {
         "description": "코멘트 작성입니다.",
+        "tags": ["댓글API"],
         "parameters": [
           {
             "name": "postId",
@@ -192,6 +194,7 @@
     "/comments/{commentId}": {
       "put": {
         "description": "코멘트 수정",
+        "tags": ["댓글API"],
         "parameters": [
           {
             "name": "commentId",
@@ -232,6 +235,7 @@
       },
       "delete": {
         "description": "코멘트 삭제 입니다.",
+        "tags": ["댓글API"],
         "parameters": [
           {
             "name": "commentId",
