@@ -5,7 +5,7 @@ const { Op } = Sequelize;
 const { Posts, Likes } = require('../models');
 // 좋아요를 찾아서 같이 넣어줄 때도 있기 때문에 Likes도 넣어준다. 
 
-class PostRepository {
+class PostsRepository {
   findAllPost = async () => {
     // 좋아요 가져오기
     const likes = await Likes.findAll();
@@ -93,4 +93,4 @@ class PostRepository {
   };
 }
 
-module.exports = PostRepository;
+module.exports = PostsRepository;

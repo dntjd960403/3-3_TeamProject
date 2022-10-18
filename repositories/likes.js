@@ -3,7 +3,7 @@ const { Sequelize } = require('../models');
 const { Op } = Sequelize;
 const { Posts, Likes } = require('../models');
 
-class LikeRepository {
+class LikesRepository {
 
   findUserLikePosts = async (userId) => {
     let userLikes = await Likes.findAll({
@@ -75,4 +75,4 @@ function getPostsByPostIdArray(postIdArray, posts) {
     return postIdArray.includes(post.postId);
   });
 }
-module.exports = LikeRepository;
+module.exports = LikesRepository;

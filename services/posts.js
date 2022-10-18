@@ -1,10 +1,10 @@
-const PostRepository = require('../repositories/posts');
+const PostsRepository = require('../repositories/posts');
 // 결국 sequelize 관련 require 는 repository에서 해야함..
 
 
-class PostService {
+class PostsService {
 
-  postRepository = new PostRepository();
+  postRepository = new PostsRepository();
 
   findAllPost = async () => {
     // 찾기 
@@ -62,4 +62,4 @@ class PostService {
 }
 
 
-module.exports = PostService;
+module.exports = PostsService;
