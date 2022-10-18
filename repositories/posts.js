@@ -45,7 +45,7 @@ class PostRepository {
     // 만든 게시글 내용 올려보내기
     return createPostData;
   };
-
+ㅁ
   findPostById = async (postId) => {
     // 일부러 기존거 안 쳐내고 그냥 이걸로 하는거임.
     const likes = await Likes.findAll({
