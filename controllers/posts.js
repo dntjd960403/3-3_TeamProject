@@ -22,53 +22,78 @@ class PostsController {
 
 
   getPosts = async (req, res, next) => {
-    const posts = await this.postsService.findAllPost();
+    try {
+      const result = await this.postsService.findAllPost();
 
-    res.status(200).json({ "전체조회 결과": posts });
+      res.status(200).json({ message: result });
+
+    } catch (err) {
+      res.status(404).send(err)
+    }
   };
 
   getPostById = async (req, res, next) => {
-    const { postId } = req.params;
-    const post = await this.postsService.findPostById(postId);
+    try {
+      const { postId } = req.params;
+      const result = await this.postsService.findPostById(postId);
 
-    res.status(200).json({ "상세조회 결과": post });
+      res.status(200).json({ message: result });
+
+    } catch (err) {
+      res.status(400).send(err)
+    }
   };
 
   createPost = async (req, res, next) => {
-    const { userId } = res.locals.user;
-    const { title, content } = await postsSchema.validateAsync(req.body); // 게시글 생성할 때 joi 검사 한번.
+    try {
+      const { userId } = res.locals.user;
+      const { title, content } = await postsSchema.validateAsync(req.body); // 게시글 생성할 때 joi 검사 한번.
 
-    const createPostData = await this.postsService.createPost(
-      userId,
-      title,
-      content
-    );
-    res.status(201).json({ message: createPostData });
+      const result = await this.postsService.createPost(
+        userId,
+        title,
+        content
+      );
+      res.status(201).json({ message: result });
+
+    } catch (err) {
+      res.status(400).send(err)
+    }
   };
 
   updatePost = async (req, res, next) => {
-    const { userId } = res.locals.user;
-    const { postId } = req.params;
-    const { title, content } = await postsSchema.validateAsync(req.body);
+    try {
+      const { userId } = res.locals.user;
+      const { postId } = req.params;
+      const { title, content } = await postsSchema.validateAsync(req.body);
 
-    const message = await this.postsService.updatePost(
-      userId,
-      postId,
-      title,
-      content
-    );
+      const result = await this.postsService.updatePost(
+        userId,
+        postId,
+        title,
+        content
+      );
 
-    res.status(200).json(message);
+      res.status(200).json({ message: result });
+
+    } catch (err) {
+      res.status(400).send(err)
+    }
   };
 
   deletePost = async (req, res, next) => {
-    const { userId } = res.locals.user;
-    const { postId } = req.params;
+    try {
+      const { userId } = res.locals.user;
+      const { postId } = req.params;
 
-    // 비밀번호는 authMiddleware를 통해 전할 수 있기 때문에 뺐음.
-    const message = await this.postsService.deletePost(userId, postId);
+      // 비밀번호는 authMiddleware를 통해 전할 수 있기 때문에 뺐음.
+      const result = await this.postsService.deletePost(userId, postId);
 
-    res.status(200).json(message);
+      res.status(200).json({ message: result });
+
+    } catch (err) {
+      res.status(400).send(err)
+    }
   };
 }
 
