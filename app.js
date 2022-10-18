@@ -15,6 +15,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cookieParser());
 
+//풀 되라~
 app.use('/', routes);
 app.use(cors());
 app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerFile));
