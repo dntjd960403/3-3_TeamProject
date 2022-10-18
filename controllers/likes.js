@@ -1,12 +1,12 @@
-const LikeService = require('../services/likes');
+const LikesService = require('../services/likes');
 
 class LikesController {
-  LikeService = new LikeService();
+  LikesService = new LikesService();
 
   getlikes = async (req, res, next) => {
     const { userId } = res.locals.user;
 
-    let userLikes = await this.LikeService.findAllLike(userId);
+    let userLikes = await this.LikesService.findAllLike(userId);
 
     res.status(200).json({ userLikes })
   }
@@ -15,7 +15,7 @@ class LikesController {
     const { userId } = res.locals.user;
     const { postId } = req.params;
 
-    const result = await this.LikeService.putLike(userId, postId)
+    const result = await this.LikesService.putLike(userId, postId)
 
     res.status(200).json({ result })
   }

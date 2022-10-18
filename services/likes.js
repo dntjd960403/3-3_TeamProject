@@ -1,10 +1,10 @@
-const LikeRepository = require('../repositories/likes')
+const LikesRepository = require('../repositories/likes')
 
-class LikeService {
-  LikeRepository = new LikeRepository()
+class LikesService {
+  LikesRepository = new LikesRepository()
 
   findAllLike = async (userId) => {
-    let userLikePosts = await this.LikeRepository.findUserLikePosts(userId)
+    let userLikePosts = await this.LikesRepository.findUserLikePosts(userId)
 
     userLikePosts.sort((a, b) => b.createdAt - a.createdAt);
     userLikePosts.sort((a, b) => b.likes - a.likes);
@@ -13,11 +13,11 @@ class LikeService {
   }
 
   putLike = async (userId, postId) => {
-    const result = await this.LikeRepository.putLike(userId, postId);
+    const result = await this.LikesRepository.putLike(userId, postId);
     return result;
   }
 }
 
 
 
-module.exports = LikeService;
+module.exports = LikesService;

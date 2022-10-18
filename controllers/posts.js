@@ -1,4 +1,4 @@
-const PostService = require('../services/posts');
+const PostsService = require('../services/posts');
 const Joi = require('joi');
 // 다루는게 class 하나뿐이기 때문에 필요한건 require과 joi뿐임
 // module.exports 하는것도 PostsController 클래스 뿐임. 
@@ -6,7 +6,7 @@ const Joi = require('joi');
 const RE_TITLE = /^[a-zA-Z0-9\s\S]{1,40}$/; //게시글 제목 정규 표현식
 const RE_CONTENT = /^[\s\S]{1,3000}$/; // 게시글 내용 정규 표현식
 
-const postSchema = Joi.object({
+const postsSchema = Joi.object({
   title: Joi.string().pattern(RE_TITLE).required(),
   content: Joi.string().pattern(RE_CONTENT).required(),
 });
@@ -18,27 +18,27 @@ const postSchema = Joi.object({
 // req 로 오는 데이터들을 받아 파라미터로 넘겨줍니다.
 // res.local.uesr 에서 오는 userId 도 여기서 받아 파라미터로 넘겨줍니다.
 class PostsController {
-  postService = new PostService();
+  postsService = new PostsService();
 
 
   getPosts = async (req, res, next) => {
-    const posts = await this.postService.findAllPost();
+    const posts = await this.postsService.findAllPost();
 
     res.status(200).json({ "전체조회 결과": posts });
   };
 
   getPostById = async (req, res, next) => {
     const { postId } = req.params;
-    const post = await this.postService.findPostById(postId);
+    const post = await this.postsService.findPostById(postId);
 
     res.status(200).json({ "상세조회 결과": post });
   };
 
   createPost = async (req, res, next) => {
     const { userId } = res.locals.user;
-    const { title, content } = await postSchema.validateAsync(req.body); // 게시글 생성할 때 joi 검사 한번.
+    const { title, content } = await postsSchema.validateAsync(req.body); // 게시글 생성할 때 joi 검사 한번.
 
-    const createPostData = await this.postService.createPost(
+    const createPostData = await this.postsService.createPost(
       userId,
       title,
       content
@@ -49,9 +49,9 @@ class PostsController {
   updatePost = async (req, res, next) => {
     const { userId } = res.locals.user;
     const { postId } = req.params;
-    const { title, content } = await postSchema.validateAsync(req.body);
+    const { title, content } = await postsSchema.validateAsync(req.body);
 
-    const message = await this.postService.updatePost(
+    const message = await this.postsService.updatePost(
       userId,
       postId,
       title,
@@ -66,7 +66,7 @@ class PostsController {
     const { postId } = req.params;
 
     // 비밀번호는 authMiddleware를 통해 전할 수 있기 때문에 뺐음.
-    const message = await this.postService.deletePost(userId, postId);
+    const message = await this.postsService.deletePost(userId, postId);
 
     res.status(200).json(message);
   };
