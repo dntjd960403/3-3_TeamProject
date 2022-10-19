@@ -60,7 +60,7 @@ class LoginController {
       }
 
       await this.loginService.changePassword(nickname, password);
-      return res.status(200).json({ message: '비밀번호를 수정하였습니다.' });
+      return res.status(200).json({ message: '비밀번호를 수정하였습니다링.' });
     } catch (error) {
       console.log(`${req.method} ${req.originalUrl} : ${error.message}`);
       return res.status(400).send({
