@@ -12,6 +12,7 @@ module.exports = (req, res, next) => {
 
     next();
   } catch (error) {
+    console.log(error)
     return res.status(400).send({
       errorMessage: '잘못된 접근입니다.',
     });
