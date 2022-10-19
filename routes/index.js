@@ -4,10 +4,9 @@ const Posts = require('./posts');
 const Comments = require('./comments');
 const Login = require('./login');
 const SignUp = require('./signup');
-
 const router = express.Router();
 
-router.use('/likes/', Likes);
+
 router.use('/posts/', Posts);
 router.use('/comments/', Comments);
 router.use('/login/', Login);
