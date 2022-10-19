@@ -1,0 +1,7 @@
+// const app = require("../app");
+// const supertest = require("supertest");
+
+// test("비밀번호와 확인이 다를 때 412포트 반환 ", async () => {
+//     const res = await supertest(app).post("/login").send({nickname:"aaa123", password:"1234"});
+//     expect(res.status).toEqual(412);
+// });
