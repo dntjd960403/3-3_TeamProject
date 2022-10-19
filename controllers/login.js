@@ -23,9 +23,7 @@ class LoginController {
 
       const { token, expires } = await this.loginService.loginUser(nickname, password);
 
-      res.cookie(process.env.COOKIE_NAME, `Bearer ${token}`, {
-        expires: expires,
-      });
+      res.cookie(process.env.COOKIE_NAME, `Bearer ${token}`, { expires: expires });
 
       return res.status(200).json({ token });
     } catch (error) {
@@ -54,12 +52,8 @@ class LoginController {
           errorMessage: '패스워드 확인이 일치하지 않습니다.',
         });
       }
-      if (password.search(re_password) === -1) {
-        return res.status(412).send({
-          errorMessage: '패스워드 형식이 일치하지 않습니다.',
-        });
-      }
-      if (isRegexValidation(password, nickname)) {
+
+      if (password.search(nickname) !== -1) {
         return res.status(412).send({
           errorMessage: '패스워드에 닉네임이 포함되어 있습니다.',
         });
@@ -74,10 +68,6 @@ class LoginController {
       });
     }
   };
-}
-
-function isRegexValidation(target, regex) {
-  return target.search(regex) !== -1;
 }
 
 module.exports = LoginController;
