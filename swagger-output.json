@@ -1,64 +1,62 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "1.0.0 저세상 버전",
-    "title": "응 끝났어~",
-    "description": "이것만 있으면 이해 쌉가능"
+    "version": "1.0.0",
+    "title": "Swagger도 조져버려따리~",
+    "description": "swagger 만들기"
   },
   "host": "localhost:3030",
   "basePath": "/",
   "tags": [
     {
-      "name": "Posts",
-      "description": "Endpoints 당구링"
+      "name": "회원 가입API",
+      "description": "회원가입이요"
+    },
+    {
+      "name": "로그인API",
+      "description": ""
+    },
+    {
+      "name": "게시물API",
+      "description": ""
+    },
+    {
+      "name": "댓글API",
+      "description": ""
+    },
+    {
+      "name": "좋아요API",
+      "description": ""
     }
-    ],
-  "schemes": [
-    "http",
-    "https",
-    "비밀의방"
   ],
+  "schemes": ["http"],
   "securityDefinitions": {
     "apiKeyAuth": {
       "type": "apiKey",
-      "in": "header",
-      "name": "X-API-KEY",
+      "in": "cookie",
+      "name": "HangHae99",
       "description": "any description..."
     }
   },
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
   "paths": {
-    "/posts/like": {
+    "/likes/": {
       "get": {
-        "tags": [
-          "Posts"
-        ],
         "description": "",
+        "tags": ["좋아요API"],
         "parameters": [],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
           "403": {
             "description": "Forbidden"
           }
         }
       }
     },
-    "/posts/{postId}/like": {
+    "/likes/{postId}": {
       "put": {
         "description": "",
-        "tags": [
-          "Posts"
-        ],
+        "tags": ["좋아요API"],
         "parameters": [
           {
             "name": "postId",
@@ -68,65 +66,34 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
           "403": {
             "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
           }
         }
       }
     },
     "/posts/": {
       "get": {
-        "tags": [
-          "Posts"
-        ],
         "description": "",
+        "tags": ["게시물API"],
         "parameters": [],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          }
-        }
+        "responses": {}
       },
       "post": {
-        "tags": [
-          "Posts"
-        ],
         "description": "",
+        "tags": ["게시물API"],
         "parameters": [],
         "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
           "403": {
             "description": "Forbidden"
-          },
-          "412": {
-            "description": "Precondition Failed"
           }
         }
       }
     },
     "/posts/{postId}": {
       "get": {
-        "tags": [
-          "Posts"
-        ],
         "description": "",
+        "tags": ["게시물API"],
         "parameters": [
           {
             "name": "postId",
@@ -135,20 +102,11 @@
             "type": "string"
           }
         ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          }
-        }
+        "responses": {}
       },
       "put": {
-        "tags": [
-          "Posts"
-        ],
         "description": "",
+        "tags": ["게시물API"],
         "parameters": [
           {
             "name": "postId",
@@ -158,61 +116,22 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
           "403": {
             "description": "Forbidden"
-          },
-          "412": {
-            "description": "Precondition Failed"
           }
         }
       },
       "delete": {
-        "tags": [
-          "Posts"
-        ],
         "description": "",
-        "parameters": [
-          {
-            "name": "postId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        }
+        "tags": ["게시물API"],
+        "parameters": [],
+        "responses": {}
       }
     },
     "/comments/{postId}": {
       "get": {
-        "tags": [
-          "Comments"
-        ],
         "description": "코멘트 불러오기",
+        "tags": ["댓글API"],
         "parameters": [
           {
             "name": "postId",
@@ -234,10 +153,8 @@
         }
       },
       "post": {
-        "tags": [
-          "Comments"
-        ],
         "description": "코멘트 작성입니다.",
+        "tags": ["댓글API"],
         "parameters": [
           {
             "name": "postId",
@@ -246,15 +163,14 @@
             "type": "string"
           },
           {
-            "name": "body", 
+            "name": "body",
             "in": "body",
             "schema": {
               "type": "object",
               "properties": {
-                "comment": { 
+                "comment": {
                   "example": "코멘트쓰셈"
                 }
-
               }
             }
           }
@@ -277,10 +193,8 @@
     },
     "/comments/{commentId}": {
       "put": {
-        "tags": [
-          "Comments"
-        ],
         "description": "코멘트 수정",
+        "tags": ["댓글API"],
         "parameters": [
           {
             "name": "commentId",
@@ -289,15 +203,14 @@
             "type": "string"
           },
           {
-            "name": "body", 
+            "name": "body",
             "in": "body",
             "schema": {
               "type": "object",
               "properties": {
-                "comment": { 
+                "comment": {
                   "example": "수정할 코멘트 작성하세요."
                 }
-
               }
             }
           }
@@ -321,10 +234,8 @@
         }
       },
       "delete": {
-        "tags": [
-          "Comments"
-        ],
         "description": "코멘트 삭제 입니다.",
+        "tags": ["댓글API"],
         "parameters": [
           {
             "name": "commentId",
@@ -351,70 +262,129 @@
     },
     "/login/": {
       "post": {
-        "tags": [
-          "Sign"
-        ],
-        "description": "로그인 하는겁니다",
-       "parameters": [
-        {
-          "name": "body", 
-          "in": "body",
-          "schema": {
-            "type": "object",
-            "properties": {
-              "nickname": { 
-                "example": "아이디"
-              },
-              "password": {
-                "example": "패뜨워드"
+        "description": "로그인 하기~",
+        "tags": ["로그인API"],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nickname": {
+                  "example": "아이디"
+                },
+                "password": {
+                  "example": "패뜨워드"
+                }
               }
             }
           }
-        }
         ],
-        
-
         "responses": {
-          "200": {
-            "description": "OK"
-          },
           "400": {
             "description": "Bad Request"
           },
           "403": {
             "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/login/password": {
+      "put": {
+        "description": "비밀번호를 잊으셨나요? 허허 괜찮습니다 닉네임만 기억한다면",
+        "tags": ["로그인API"],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nickname": {
+                  "example": "아이디"
+                },
+                "password": {
+                  "example": "패뜨워드"
+                },
+                "confirm": {
+                  "example": "패뜨워드 확인~"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
           },
-          "412": {
-            "description": "Precondition Failed"
+          "403": {
+            "description": "Forbidden"
           }
         }
       }
     },
     "/signup/": {
       "post": {
-        "tags": [
-          "Sign"
-        ],
-        "description": "",
-        "parameters": [],
-        "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "412": {
-            "description": "Precondition Failed"
+        "description": "회원가입 기능입니더~",
+        "tags": ["회원 가입API"],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nickname": {
+                  "example": "아이디"
+                },
+                "password": {
+                  "example": "패뜨워드"
+                },
+                "confirm": {
+                  "example": "패뜨워드 확인~"
+                }
+              }
+            }
           }
-        }
+        ],
+        "responses": {}
       }
     }
   },
   "definitions": {
+    "signup": {
+      "type": "object",
+      "properties": {
+        "father": {
+          "type": "string",
+          "example": "Simon Doe"
+        },
+        "mother": {
+          "type": "string",
+          "example": "Marie Doe"
+        }
+      }
+    },
+    "User": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "int",
+          "example": 1
+        },
+        "nickname": {
+          "type": "string",
+          "example": "aaa"
+        },
+        "password": {
+          "type": "string",
+          "example": "1111"
+        }
+      },
+      "required": ["nickname", "password"]
+    },
     "comments": {
       "type": "object",
       "properties": {
@@ -435,45 +405,6 @@
           "example": "홀리몰리짱짱"
         }
       }
-    },
-    "User": {
-      "type": "object",
-      "properties": {
-      "userId": {
-      "type": "int",
-      "example": 1
-      },
-      "nickname": {
-      "type": "string",
-      "example": "aaa"
-      },
-      "password": {
-      "type": "string",
-      "example": "1111"
-      }
-      },
-      "required": ["nickname", "password"]
-      },
-    "AddUser": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "example": "Jhon Doe"
-        },
-        "age": {
-          "type": "number",
-          "example": 29
-        },
-        "about": {
-          "type": "string",
-          "example": ""
-        }
-      },
-      "required": [
-        "name",
-        "age"
-      ]
     }
   }
 }

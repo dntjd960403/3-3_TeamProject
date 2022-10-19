@@ -1,17 +1,17 @@
-const { Users } = require("../models");
+const { Users } = require('../models');
 
 class SignupRepository {
-    createUser = async (nickname, password) => {
-        const createUser = await Users.create({nickname, password})
+  createUser = async (nickname, password) => {
+    const createUser = await Users.create({ nickname, password });
 
-        return createUser
-    }
+    return createUser;
+  };
 
-    findSameNickname = async (nickname) => {
-       const userData = await Users.findOne({where:{nickname}})
+  findSameNickname = async (nickname) => {
+    const userData = await Users.findOne({ where: { nickname } });
 
-       return userData
-    }
+    return userData;
+  };
 }
 
-module.exports = SignupRepository
+module.exports = SignupRepository;
