@@ -7,18 +7,7 @@ const { Posts, Likes } = require('../models');
 
 class PostsRepository {
   findAllPost = async () => {
-    try {
-      // 좋아요 가져오기
-      const likes = await Likes.findAll();
-      // 게시글 가져오기
-      const postsQuery = `
-                  SELECT p.postId, u.userId, u.nickname, p.title, p.createdAt, p.updatedAt
-                  FROM Posts AS p
-                  JOIN Users AS u
-                  ON p.userId = u.userId
-                  ORDER BY p.postId DESC`;
 
-      let posts = await sequelize.query(postsQuery, {
         type: Sequelize.QueryTypes.SELECT,
       });
 
@@ -104,7 +93,7 @@ class PostsRepository {
     }
   };
 
-  deletePost = async (userId, postId) => {
+  deletePost = async (postId,userId) => {
     try {
       const deleteCount = await Posts.destroy({
         where: { userId, postId },
