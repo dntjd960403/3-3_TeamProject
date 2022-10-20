@@ -1,6 +1,10 @@
 const { Users } = require('../models');
 
 class SignupRepository {
+  constructor() {
+    this.Users = Users;
+  }
+
   createUser = async (nickname, password) => {
     const createUser = await Users.create({ nickname, password });
 

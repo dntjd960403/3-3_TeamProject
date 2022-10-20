@@ -1,7 +1,12 @@
 const app = require('../app');
 const supertest = require('supertest');
 
-jest.mock('../models');
+const signupUsersRepository = require('../repositories/signup');
+
+const UsersModel = () => ({
+  findOne: jest.fn(),
+  create: jest.fn(),
+});
 
 // Users.findOne = jest.fn();
 
@@ -35,7 +40,17 @@ test('해당 닉네임이 있을 시 412포트 반환', async () => {
     .send({ nickname: 'aaa123', password: '1234', confirm: '1234' });
   expect(res.status).toEqual(200);
 });
-// test("", async () => {
-//     const res = await supertest(app).post("/signup").send({nickname:"aaa123", password:"1234", confirm:"12334"});
-//     expect(res.status).toEqual(412);
-// });
+test('', async () => {
+  const res = await supertest(app)
+    .post('/signup')
+    .send({ nickname: 'aaa123', password: '1234', confirm: '1234' });
+  let signupUser = new signupUsersRepository();
+  signupUser.findOne = UsersModel();
+
+  beforeEach(() => {
+    // 모든 Mock을 초기화합니다.
+    jest.resetAllMocks();
+  });
+
+  expect(signupUser.findOne).toHaveBeenCalledTimes(1);
+});
