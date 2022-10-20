@@ -43,7 +43,7 @@ class PostsRepository {
         content,
       });
       // 만든 게시글 내용 올려보내기
-      return "게시물을 생성하였습니다.";
+      return "게시글을 생성하였습니다.";
 
     } catch(err) {
       throw err
@@ -58,9 +58,7 @@ class PostsRepository {
           [Op.and]: [{ postId }],
         },
       });
-
-
-
+      
       let post = await this.Posts.findOne({ where: { postId } });
 
       if (post === undefined) throw { message: '게시글을 찾을 수 없습니다.' }
