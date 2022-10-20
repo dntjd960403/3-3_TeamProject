@@ -45,7 +45,7 @@ class PostsRepository {
       // 만든 게시글 내용 올려보내기
       return "게시물을 생성하였습니다.";
 
-    } catch {
+    } catch(err) {
       throw err
     }
   };
