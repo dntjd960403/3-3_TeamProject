@@ -43,7 +43,7 @@
   "paths": {
     "/likes/": {
       "get": {
-        "description": "",
+        "description": "좋아요 누른 게시물 보기",
         "tags": ["좋아요API"],
         "parameters": [],
         "responses": {
@@ -55,7 +55,7 @@
     },
     "/likes/{postId}": {
       "put": {
-        "description": "",
+        "description": "좋아요 누르기",
         "tags": ["좋아요API"],
         "parameters": [
           {
@@ -74,15 +74,31 @@
     },
     "/posts/": {
       "get": {
-        "description": "",
+        "description": "모든 게시물 목록 불러오기",
         "tags": ["게시물API"],
         "parameters": [],
         "responses": {}
       },
       "post": {
-        "description": "",
+        "description": "게시물 생성하기",
         "tags": ["게시물API"],
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "example":"제목"
+                },
+                "content": {
+                  "example": "내용"
+                }
+              }
+            }
+          }
+        ],
         "responses": {
           "403": {
             "description": "Forbidden"
@@ -92,7 +108,7 @@
     },
     "/posts/{postId}": {
       "get": {
-        "description": "",
+        "description": "게시물 상세보기",
         "tags": ["게시물API"],
         "parameters": [
           {
@@ -105,7 +121,7 @@
         "responses": {}
       },
       "put": {
-        "description": "",
+        "description": "게시물 수정하기",
         "tags": ["게시물API"],
         "parameters": [
           {
@@ -113,6 +129,21 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "example": "수정할 제목"
+                },
+                "content": {
+                  "example": "수정할 내용"
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -122,9 +153,16 @@
         }
       },
       "delete": {
-        "description": "",
+        "description": "게시물 삭제하기",
         "tags": ["게시물API"],
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "postId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "responses": {}
       }
     },
