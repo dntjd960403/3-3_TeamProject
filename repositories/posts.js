@@ -6,17 +6,21 @@ const { Posts, Likes } = require('../models');
 // 좋아요를 찾아서 같이 넣어줄 때도 있기 때문에 Likes도 넣어준다. 
 
 class PostsRepository {
+  constructor() {
+    this.Posts = Posts; 
+    this.Likes = Likes;
+  } // 모킹하기 위한 기본 과정. 바깥에서 진짜 Posts 데이터를 가져오는것을 방지하기 위해 클래스의 상속을 이용한다. 
 
   findAllPost = async () => {
     try {
       // 좋아요 가져오기
-      const likes = await Likes.findAll();
+      const likes = await this.Likes.findAll(); // Likes -> this.Likes this.Likes는 테스트파일의 postsRepository.Posts 를 가리키게 된다. 
 
-
-      let posts = await Posts.findAll();
+      //map을 쓰니까 const안될거 같아서 let씀
+      let posts = await this.Posts.findAll({attributes: {exclude: ['content'],}}); 
+      
       // 게시글에 좋아요 갯수 넣어주기
       posts = posts.map((post) => {
-        console.log(post)
         return {
           ...post.dataValues,
           likes: likes.filter((like) => like.postId === post.postId).length,
@@ -33,7 +37,7 @@ class PostsRepository {
   createPost = async (userId, title, content) => {
     try {
       // 검사는 service에서 다 했음. 넣는 기능만
-      const createPostData = await Posts.create({
+      const createPostData = await this.Posts.create({
         userId,
         title,
         content,
@@ -49,7 +53,7 @@ class PostsRepository {
   findPostById = async (postId) => {
     try {
       // 일부러 기존거 안 쳐내고 그냥 이걸로 하는거임.
-      const likes = await Likes.findAll({
+      const likes = await this.Likes.findAll({
         where: {
           [Op.and]: [{ postId }],
         },
@@ -57,7 +61,7 @@ class PostsRepository {
 
 
 
-      let post = await Posts.findOne({ where: { postId } });
+      let post = await this.Posts.findOne({ where: { postId } });
 
       if (post === undefined) throw { message: '게시글을 찾을 수 없습니다.' }
       return {
@@ -74,7 +78,7 @@ class PostsRepository {
 
   updatePost = async (userId, postId, title, content) => {
     try {
-      const updatePostData = await Posts.update(
+      const updatePostData = await this.Posts.update(
         { title, content },
         { where: { postId, userId } }
       );
@@ -87,7 +91,7 @@ class PostsRepository {
 
   deletePost = async (userId, postId) => {
     try {
-      const deleteCount = await Posts.destroy({
+      const deleteCount = await this.Posts.destroy({
         where: { userId, postId },
       });
       return deleteCount
