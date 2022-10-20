@@ -69,7 +69,7 @@ describe("posts repo쪽 단위테스트 입니당", () => {
     // Matcher error: received value must be a mock or spy function ????
     // expect(postsRepository.Posts.findAll({ attributes: { exclude: ['content'], } })[0].dataValues.postId).toEqual(1);
     // 이거 되네ㅋㅋㅋㅋ 
-    expect(postsRepository.Posts.findAll).toHaveBeenCalledWith(); // 처음에안됐는데 분명..????
+    expect(postsRepository.Posts.findAll).toHaveBeenCalledWith({ attributes: { exclude: ['content'], } }); // 처음에안됐는데 분명..????
     expect(postsRepository.Likes.findAll).toHaveBeenCalledWith();
     expect(postlist).toEqual([{
       postId: 1,
