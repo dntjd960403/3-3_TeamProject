@@ -2,10 +2,10 @@
   "swagger": "2.0",
   "info": {
     "version": "1.0.0",
-    "title": "Swagger도 조져버려따리~",
+    "title": "12조 조졌조 블로긔",
     "description": "swagger 만들기"
   },
-  "host": "localhost:3030",
+  "host": "3.35.231.116",
   "basePath": "/",
   "tags": [
     {
@@ -90,7 +90,7 @@
               "type": "object",
               "properties": {
                 "title": {
-                  "example":"제목"
+                  "example": "제목"
                 },
                 "content": {
                   "example": "내용"
