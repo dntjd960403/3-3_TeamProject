@@ -57,7 +57,7 @@ class PostsController {
       res.status(201).json({ message: result });
 
     } catch (err) {
-      res.status(400).send(err)
+      res.status(400).send(err.message)
     }
   };
 

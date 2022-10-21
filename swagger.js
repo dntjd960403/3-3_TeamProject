@@ -7,7 +7,7 @@ const doc = {
     title: 'My API',
     description: 'swagger 만들기',
   },
-  host: 'localhost:3030',
+  host: '3.35.231.116',
   schemes: ['http'],
   consumes: ['application/json'],
   produces: ['application/json'],
